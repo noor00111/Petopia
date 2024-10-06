@@ -17,7 +17,7 @@ const fetchCatagories = () => {
 const showCategories = (categoriesPet) =>{
     const categoriesSection = document.getElementById('categories');
     categoriesPet.forEach((categoriesPetData) =>{
-        console.log(categoriesPetData);
+        // console.log(categoriesPetData);
     const createCategoriesButton = document.createElement('div');
     createCategoriesButton.innerHTML= `
     
@@ -32,3 +32,31 @@ const showCategories = (categoriesPet) =>{
 fetchCatagories();
 
 // create card for all pets
+const fetchPetCard = () =>{
+    fetch('https://openapi.programming-hero.com/api/peddy/pets')
+    .then((res) => res.json())
+    .then((data) => showPetsCards(data.pets))
+    .catch((err) => console.log(err))
+};
+
+//show the card for pets
+const showPetsCards = (data) =>{
+    const cardsContainer = document.getElementById('cards-div');
+    data.forEach((cardInfo) => {
+    const {image, pet_name, breed, date_of_birth, gender, price, pet_details} = cardInfo;
+    const card = document.createElement('div');
+    card.innerHTML = `
+    <div class="text-left border-2">
+    <img class="w-full h-[160px] object-cover" src="${image}"/>
+    <h1 class="font-bold">${pet_name}</h1>
+    <p>Breed: ${breed}</p>
+    <p>Birth: ${date_of_birth}</p>
+    <p>Gender: ${gender}</p>
+    <p>Price: ${price}</p>
+    </div>`;
+
+    cardsContainer.append(card);
+    });
+}
+
+fetchPetCard();
