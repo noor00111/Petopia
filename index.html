@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petopia</title>
+
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- daisyUI -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- font-awesome -->
+<script src="https://kit.fontawesome.com/206afff65d.js" crossorigin="anonymous"></script>
+</head>
+
+<style>
+    body{
+        font-family: "Lato", sans-serif;
+    }
+    .btn-viewMore-color{
+        background-color: #0E7A81;
+        color: white;
+    }
+    .btn-viewMore-color:hover{
+        background-color: #0E7A81;
+        
+    }
+</style>
+<body>
+    <header>
+        <nav  class="w-11/12 mx-auto justify-center py-7">
+            <div class="navbar bg-base-100 mb-7">
+
+                <div class="navbar-start">
+                 <img src="images/logo.webp" alt="">
+                 <h1 class="m-3 font-extrabold text-2xl">Petopia</h1>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                  <ul class="menu menu-horizontal px-1 text-base text-gray-500">
+                    <li><a>Home</a></li>
+                    <li><a>Shop</a></li> 
+                    <li><a>Contact</a></li>
+                  </ul>
+                </div>
+                <div class="navbar-end">
+                  <a class="btn bg-white rounded-full border-solid border-2 border-indigo-100"><i class="fa-regular fa-user"></i></a>
+                </div>
+              </div>
+
+              <!-- banner-section -->
+              <div class="banner-section hero">
+                <div class="hero-content text-center">
+                  <div class="">
+                    <div class="flex justify-center font-bold text-gray-500 mb-4">
+                    <h1 class="text-2xl">Bringing Families Together </h1>
+                    <img class="w-4 h-4 mt-1 ml-4" src="images/fire.png" alt="">
+                    </div>
+                    <h1 class="text-6xl text-gray-900 font-extrabold">Your Path to Adoption<br> Starts Here</h1>
+                    <p class="py-5 text-base">
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking <br> at its layout. The point of using Lorem Ipsum is that it has a.
+                    </p>
+                    <button id="btn-viewMore" class="btn btn-viewMore-color w-40">View More</button>
+                <img class="mx-auto" src="images/pet.webp" alt="">  
+                </div>
+                </div>
+              </div>
+        </nav>
+
+      
+    </header>
+
+
+    
+</body>
+<footer></footer>
+
+<!-- js file -->
+ <script src="js/index.js"></script>
+</html>
