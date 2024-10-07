@@ -24,11 +24,14 @@
     }
     .btn-viewMore-color:hover{
         background-color: #0E7A81;
-        
+    }
+    .modal-btn{
+background-color: #0E7A811A;
+width: 100%;
     }
 </style>
 <body>
-    <header class="hidden">
+    <header>
         <nav  class="w-11/12 mx-auto justify-center py-7">
             <div class="navbar bg-base-100 mb-7">
 
@@ -84,8 +87,23 @@
             <div id="cards-div" class="col-span-3 grid lg:grid-cols-3 gap-5"></div>
             <div id="liked-div" class=""></div>
          </div>
-    </div>
 
+         <!-- modal -->
+<button class="hidden btn" onclick="myModal.showModal()"></button>
+<dialog id="myModal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <div id="modal-section">
+
+    </div>
+    <div class="modal-action flex justify-center modal-btn p-3 rounded border border-indigo-300">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="text-[#0E7A81] font-bold w-96" onclick="">Cancel</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+    </div>
     </main>
     
 </body>
