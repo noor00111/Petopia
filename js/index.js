@@ -40,19 +40,32 @@ const fetchPetCard = () =>{
 };
 
 //show the card for pets
-const showPetsCards = (data) =>{
+const showPetsCards = (cardsData) =>{
     const cardsContainer = document.getElementById('cards-div');
-    data.forEach((cardInfo) => {
+    cardsData.forEach((cardInfo) => {
     const {image, pet_name, breed, date_of_birth, gender, price, pet_details} = cardInfo;
     const card = document.createElement('div');
     card.innerHTML = `
-    <div class="text-left border-2">
-    <img class="w-full h-[160px] object-cover" src="${image}"/>
-    <h1 class="font-bold">${pet_name}</h1>
+    <div class="text-left border-2 p-7 text-gray-600">
+    <img class="w-full h-[160px] object-cover rounded" src="${image}"/>
+    <h1 class="font-bold text-xl text-black mt-4">${pet_name}</h1>
+
+    <div class="flex flex-cols gap-2 ">
+    <img class="w-4 h-4 mt-1 opacity-65" src="images/breed-icon.png" />
     <p>Breed: ${breed}</p>
+    </div>
+    <div class="flex flex-cols gap-2">
+    <img class="w-4 h-4 mt-1 opacity-65" src="images/calendar-icon.png"
     <p>Birth: ${date_of_birth}</p>
-    <p>Gender: ${gender}</p>
-    <p>Price: ${price}</p>
+    </div>
+    <div class="flex flex-cols gap-1">
+    <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
+     <p>Gender: ${gender}</p>
+    </div>
+    <div class="flex flex-cols gap-1">
+    <img class="w-5 h-5 opacity-65" src="images/dollar-icon.png"
+      <p>Price: ${price}$</p>
+    </div>
     </div>`;
 
     cardsContainer.append(card);
