@@ -12,6 +12,7 @@ const fetchCatagories = () => {
     .then((data) => showCategories(data.categories))
     .catch((err) => console.log(err))
 };
+fetchCatagories();
 
 //show the categories
 const showCategories = (categoriesPet) =>{
@@ -25,11 +26,12 @@ const showCategories = (categoriesPet) =>{
     <img class="w-8" src="${categoriesPetData.category_icon}" />
     ${categoriesPetData.category}
     </button>`;
+
     categoriesSection.append(createCategoriesButton);
 
     });
 }
-fetchCatagories();
+
 
 // create card for all pets
 const fetchPetCard = () =>{
@@ -38,12 +40,17 @@ const fetchPetCard = () =>{
     .then((data) => showPetsCards(data.pets))
     .catch((err) => console.log(err))
 };
+fetchPetCard();
 
 //show the card for pets
 const showPetsCards = (cardsData) =>{
+    // console.log(cardsData)
     const cardsContainer = document.getElementById('cards-div');
+    // cardsContainer.innerHTML = "";
+
     cardsData.forEach((cardInfo) => {
     const {image, pet_name, breed, date_of_birth, gender, price, pet_details} = cardInfo;
+    // console.log(cardInfo)
     const card = document.createElement('div');
     card.innerHTML = `
     <div class="text-left border-2 p-7 text-gray-600">
@@ -52,11 +59,11 @@ const showPetsCards = (cardsData) =>{
 
     <div class="flex flex-cols gap-2 ">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/breed-icon.png" />
-    <p>Breed: ${breed}</p>
+     <p>Breed: ${breed !== undefined ? `${breed}` : "Not Found any Breed" }</p>
     </div>
     <div class="flex flex-cols gap-2">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/calendar-icon.png"
-    <p>Birth: ${date_of_birth}</p>
+    <p>Birth: ${date_of_birth !== null ? `${date_of_birth}` : "Not Found Birth Date" }</p>
     </div>
     <div class="flex flex-cols gap-1">
     <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
@@ -66,10 +73,24 @@ const showPetsCards = (cardsData) =>{
     <img class="w-5 h-5 opacity-65" src="images/dollar-icon.png"
       <p>Price: ${price}$</p>
     </div>
+   <div class="mt-2">
+   <button class="btn w-[50px] border-solid border-2 border-indigo-100 bg-white"><img class="w-4" src="images/like.png"/></button>
+   <button class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white font-bold">Adopt</button>
+   <button class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white font-bold">Details</button>
+   </div>
     </div>`;
 
     cardsContainer.append(card);
     });
 }
 
-fetchPetCard();
+
+// //get pets by category
+// onclick ='petsCategory(${categoriesPetData.id})'
+// const petsCategory = async (name) =>{
+//     const url = (`https://openapi.programming-hero.com/api/peddy/category/${name}`)
+//     const res = await fetch(url);
+//     const data = await res.json();
+//     showPetsCards(data.data.category);
+//     
+// };
