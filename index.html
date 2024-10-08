@@ -31,7 +31,7 @@ width: 100%;
     }
 </style>
 <body>
-    <header>
+    <header class="hidden">
         <nav  class="w-11/12 mx-auto justify-center py-7">
             <div class="navbar bg-base-100 mb-7">
 
@@ -69,28 +69,36 @@ width: 100%;
                 </div>
               </div>
         </nav>
-
-      
     </header>
 
-    <main>
-        
-        <div id="adopt-info" class="text-center lg:w-11/12 w-[330px] mx-auto justify-center">
+    <main class="w-11/12 mx-auto justify-center px-3">
+
+      <div id="pets-info" class="text-center">
             <h1 class="font-extrabold lg:text-4xl text-2xl text-gray-900">Adopt Your Best Friend</h1>
-            <p class="text-sm py-4 text-gray-500">It is a long established fact that a reader will be distracted by the readable content of a page when <br> looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+            <p class="px-6 my-4">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
         
             <!-- adopt pet buttons -->
-            <div id="categories" class="grid lg:grid-cols-4 md:grid-cols-1"></div>
+            <div id="categories" class="grid lg:grid-cols-4 md:grid-cols-2"></div>
+
+            <!-- countdown -->
+            <dialog id="countModal" class="modal">
+              <div class="modal-box">
+                <h3 class="text-lg font-bold">Hello!</h3>
+                <p class="py-4">Press ESC key or click outside to close</p>
+              </div>
+              <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+              </form>
+            </dialog>
         
         <!-- adopt pets cards information -->
          <div class="grid grid-cols-4 gap-5 mt-5">
-            <div id="cards-div" class="col-span-3 grid lg:grid-cols-3 gap-5"></div>
-            <div id="liked-div" class=""></div>
+            <div id="cards-div" class="lg:col-span-3 col-span-2 grid lg:grid-cols-3 gap-5"></div>
+            <div id="liked-div" class="lg:col-span-1 col-span-2 border-2"></div>
          </div>
 
          <!-- modal -->
-<button class="hidden btn" onclick="myModal.showModal()"></button>
-<dialog id="myModal" class="modal modal-bottom sm:modal-middle">
+        <dialog id="myModal" class="modal modal-bottom sm:modal-middle">
   <div class="modal-box">
     <div id="modal-section">
 
@@ -102,7 +110,7 @@ width: 100%;
       </form>
     </div>
   </div>
-</dialog>
+        </dialog>
     </div>
     </main>
     

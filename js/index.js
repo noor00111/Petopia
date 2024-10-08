@@ -1,9 +1,24 @@
 // click viewMore to go main section
-const adoptInfo = document.getElementById('adopt-info');
+const adoptInfo = document.getElementById('pets-info');
 const viewMoreButton = document.getElementById('btn-viewMore');
 viewMoreButton.addEventListener('click', function(){
     adoptInfo.scrollIntoView({behavior : 'smooth'});
 });
+
+// countdown
+// const getCountDown = (countNum = 3) =>{
+//     const counterModal = document.getElementById('countModal');
+//     counterModal.showModal();
+//     let countDown = setInterval(() => {
+//         console.log(countNum);
+//         countNum--;
+//         if(countNum <= 0){
+//             clearInterval(countDown);
+//             counterModal.close();
+//         }
+//     }, 1000);
+// };
+
 
 //create 4 categories
 const fetchCatagories = () => {
@@ -14,6 +29,7 @@ const fetchCatagories = () => {
 };
 fetchCatagories();
 
+
 //show the categories
 const showCategories = (categoriesPet) =>{
     const categoriesSection = document.getElementById('categories');
@@ -22,7 +38,7 @@ const showCategories = (categoriesPet) =>{
     const createCategoriesButton = document.createElement('div');
     createCategoriesButton.innerHTML= `
     
-    <button class="btn-category btn m-2 w-80 bg-white border border-indigo-200 font-extrabold text-xl">
+    <button  onclick="petsCategory('${categoriesPetData.category}')" class="btn-category btn m-2 w-80 bg-white border border-indigo-200 font-extrabold text-xl">
     <img class="w-8" src="${categoriesPetData.category_icon}" />
     ${categoriesPetData.category}
     </button>`;
@@ -31,7 +47,6 @@ const showCategories = (categoriesPet) =>{
 
     });
 }
-
 
 // create card for all pets
 const fetchPetCard = () =>{
@@ -46,7 +61,7 @@ fetchPetCard();
 const showPetsCards = (cardsData) =>{
     // console.log(cardsData)
     const cardsContainer = document.getElementById('cards-div');
-    // cardsContainer.innerHTML = "";
+    cardsContainer.innerHTML = "";
 
     cardsData.forEach((cardInfo) => {
     const {image, pet_name, breed, date_of_birth, gender, price, petId} = cardInfo;
@@ -74,9 +89,9 @@ const showPetsCards = (cardsData) =>{
       <p>Price: ${price}$</p>
     </div>
    <div class="mt-2">
-   <button class="btn w-[50px] border-solid border-2 border-indigo-100 bg-white"><img class="w-4" src="images/like.png"/></button>
-   <button class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white font-bold">Adopt</button>
-   <button onclick='detailsCard(${petId})' class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white font-bold">Details</button>
+   <button class="btn w-[50px] border-solid border-2 border-indigo-100 bg-white hover:border-3 hover:border-[#0E7A81] hover:bg-white"><img class="w-4" src="images/like.png"/></button>
+   <button onclick="getCountDown()" class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white hover:bg-[#0E7A81]  hover:text-white font-bold">Adopt</button>
+   <button onclick='detailsCard(${petId})' class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white hover:bg-[#0E7A81] hover:text-white font-bold">Details</button>
    </div>
     </div>`;
 
@@ -85,24 +100,30 @@ const showPetsCards = (cardsData) =>{
 }
 
 
-// //get pets by category
-// onclick ='petsCategory(${categoriesPetData.id})'
-// const petsCategory = async (name) =>{
-//     const url = (`https://openapi.programming-hero.com/api/peddy/category/${name}`)
-//     const res = await fetch(url);
-//     const data = await res.json();
-//     showPetsCards(data.data.category);
-//     
-// };
+
+////////////get pets by category///////////
+
+    // const petsCategory = async (category) =>{
+    // fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+    // .then((res) => res.json())
+    // .then((data) => showPetsCards(data.data))
+    // .catch((err) => console.log(err))
+    // }
+    const petsCategory = async (category) =>{
+    const apiURL = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
+    const response = await fetch(apiURL);
+    const data = await response.json();
+    showPetsCards(data.data);
+    
+};
 
 
-// details
+// details pet's card
 const detailsCard = async (cardId) =>{
     const apiURL = `https://openapi.programming-hero.com/api/peddy/pet/${cardId}`;
     const response = await fetch(apiURL);
     const data = await response.json();
     showDetails(data.petData);
-    
 }
 
 // show details
