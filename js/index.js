@@ -38,7 +38,7 @@ const showCategories = (categoriesPet) =>{
     const createCategoriesButton = document.createElement('div');
     createCategoriesButton.innerHTML= `
     
-    <button  onclick="petsCategory('${categoriesPetData.category}')" class="btn-category btn m-2 w-80 bg-white border border-indigo-200 font-extrabold text-xl">
+    <button id="btn-${categoriesPetData.category}" onclick="petsCategory('${categoriesPetData.category}')" class="btn-category btn m-2 w-80 bg-white border border-indigo-200 font-extrabold text-xl">
     <img class="w-8" src="${categoriesPetData.category_icon}" />
     ${categoriesPetData.category}
     </button>`;
@@ -62,6 +62,19 @@ const showPetsCards = (cardsData) =>{
     // console.log(cardsData)
     const cardsContainer = document.getElementById('cards-div');
     cardsContainer.innerHTML = "";
+
+    if(cardsData.length === 0){
+        cardsContainer.classList.remove('grid');
+        cardsContainer.innerHTML =`
+        <div class="min-h-[400px] bg-[#13131308] flex flex-col justify-center items-center">
+        <img src="images/error.webp" />
+        <h1 class="font-extrabold">No Information Available</h1>
+        <p class="text-gray-600">Take a look at the amazing world of birds, where every species has its own distinct beauty and habit. Although comprehensive material is not yet available, this category will soon be updated with fascinating details on different bird species, their habitats, and their unique traits.</p>
+        </div> `;
+        return;
+    }else{
+        cardsContainer.classList.add('grid');
+    }
 
     cardsData.forEach((cardInfo) => {
     const {image, pet_name, breed, date_of_birth, gender, price, petId} = cardInfo;
@@ -89,7 +102,7 @@ const showPetsCards = (cardsData) =>{
       <p>Price: ${price}$</p>
     </div>
    <div class="mt-2">
-   <button class="btn w-[50px] border-solid border-2 border-indigo-100 bg-white hover:border-3 hover:border-[#0E7A81] hover:bg-white"><img class="w-4" src="images/like.png"/></button>
+   <button onclick="getLikeButton('${image}')" class="btn w-[50px] border-solid border-2 border-indigo-100 bg-white hover:border-3 hover:border-[#0E7A81] hover:bg-white"><img class="w-4" src="images/like.png"/></button>
    <button onclick="getCountDown()" class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white hover:bg-[#0E7A81]  hover:text-white font-bold">Adopt</button>
    <button onclick='detailsCard(${petId})' class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white hover:bg-[#0E7A81] hover:text-white font-bold">Details</button>
    </div>
@@ -100,6 +113,20 @@ const showPetsCards = (cardsData) =>{
 }
 
 
+// like-button functionality
+const getLikeButton = (imgSrc) =>{
+    console.log(imgSrc);
+    const likePetsContainer = document.getElementById('liked-div');
+    const newContainer = document.createElement('div');
+    newContainer.classList.add = "h-[10px]";
+    newContainer.innerHTML = `
+
+    <img class="border-2 p-2 rounded" src="${imgSrc}" />
+ 
+    `;
+    likePetsContainer.append(newContainer);
+  
+}
 
 ////////////get pets by category///////////
 
@@ -109,12 +136,12 @@ const showPetsCards = (cardsData) =>{
     // .then((data) => showPetsCards(data.data))
     // .catch((err) => console.log(err))
     // }
+
     const petsCategory = async (category) =>{
     const apiURL = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
     const response = await fetch(apiURL);
     const data = await response.json();
     showPetsCards(data.data);
-    
 };
 
 
