@@ -19,6 +19,16 @@ viewMoreButton.addEventListener('click', function(){
 //     }, 1000);
 // };
 
+// remove active class
+const removeActiveButton = ()=>{
+   const categoryButtons = document.getElementsByClassName('btn-pet-category');
+    console.log(categoryButtons);
+    for(let categoryButton of categoryButtons){
+        categoryButton.classList.remove("btn-active");
+        categoryButton.classList.add("bg-white");
+    }
+};
+
 
 //create 4 categories
 const fetchCatagories = () => {
@@ -38,7 +48,8 @@ const showCategories = (categoriesPet) =>{
     const createCategoriesButton = document.createElement('div');
     createCategoriesButton.innerHTML= `
     
-    <button id="btn-${categoriesPetData.category}" onclick="petsCategory('${categoriesPetData.category}')" class="btn-category btn m-2 w-80 bg-white border border-indigo-200 font-extrabold text-xl">
+    <button id="btn-('${categoriesPetData.category}')" onclick="petsCategory('${categoriesPetData.category}')" 
+    class="btn-pet-category btn m-2 w-80 font-extrabold text-xl bg-white hover:bg-[#0E7A811A]">
     <img class="w-8" src="${categoriesPetData.category_icon}" />
     ${categoriesPetData.category}
     </button>`;
@@ -120,34 +131,42 @@ const getLikeButton = (imgSrc) =>{
     const newContainer = document.createElement('div');
     newContainer.classList.add = "h-[10px]";
     newContainer.innerHTML = `
-
     <img class="border-2 p-2 rounded" src="${imgSrc}" />
- 
     `;
     likePetsContainer.append(newContainer);
-  
 }
 
-////////////get pets by category///////////
+////////////get pets by categoryName///////////
 
-    // const petsCategory = async (category) =>{
-    // fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+    // const petsCategory = async (categoryName) =>{
+    // fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
     // .then((res) => res.json())
     // .then((data) => showPetsCards(data.data))
     // .catch((err) => console.log(err))
     // }
 
-    const petsCategory = async (category) =>{
-    const apiURL = `https://openapi.programming-hero.com/api/peddy/category/${category}`;
+    const petsCategory = async (name) =>{
+    const apiURL = `https://openapi.programming-hero.com/api/peddy/category/${name}`;
     const response = await fetch(apiURL);
     const data = await response.json();
-    showPetsCards(data.data);
+    {  
+         //remove-active-button
+         removeActiveButton();
+
+        //active-button
+    const btnActive = document.getElementById(`btn-('${name}')`);
+    btnActive.classList.add("btn-active");
+    btnActive.classList.remove("bg-white");
+
+    console.log(btnActive);
+        showPetsCards(data.data)
+    };
 };
 
 
 // details pet's card
-const detailsCard = async (cardId) =>{
-    const apiURL = `https://openapi.programming-hero.com/api/peddy/pet/${cardId}`;
+const detailsCard = async (petId) =>{
+    const apiURL = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`;
     const response = await fetch(apiURL);
     const data = await response.json();
     showDetails(data.petData);
