@@ -1,8 +1,8 @@
 // click viewMore to go main section
 const adoptInfo = document.getElementById('pets-info');
 const viewMoreButton = document.getElementById('btn-viewMore');
-viewMoreButton.addEventListener('click', function(){
-    adoptInfo.scrollIntoView({behavior : 'smooth'});
+viewMoreButton.addEventListener('click', function () {
+    adoptInfo.scrollIntoView({ behavior: 'smooth' });
 });
 
 // countdown
@@ -20,10 +20,10 @@ viewMoreButton.addEventListener('click', function(){
 // };
 
 // remove active class
-const removeActiveButton = ()=>{
-   const categoryButtons = document.getElementsByClassName('btn-pet-category');
+const removeActiveButton = () => {
+    const categoryButtons = document.getElementsByClassName('btn-pet-category');
     console.log(categoryButtons);
-    for(let categoryButton of categoryButtons){
+    for (let categoryButton of categoryButtons) {
         categoryButton.classList.remove("btn-active");
         categoryButton.classList.add("bg-white");
     }
@@ -33,20 +33,20 @@ const removeActiveButton = ()=>{
 //create 4 categories
 const fetchCatagories = () => {
     fetch('https://openapi.programming-hero.com/api/peddy/categories')
-    .then((res) => res.json())
-    .then((data) => showCategories(data.categories))
-    .catch((err) => console.log(err))
+        .then((res) => res.json())
+        .then((data) => showCategories(data.categories))
+        .catch((err) => console.log(err))
 };
 fetchCatagories();
 
 
 //show the categories
-const showCategories = (categoriesPet) =>{
+const showCategories = (categoriesPet) => {
     const categoriesSection = document.getElementById('categories');
-    categoriesPet.forEach((categoriesPetData) =>{
+    categoriesPet.forEach((categoriesPetData) => {
         // console.log(categoriesPetData);
-    const createCategoriesButton = document.createElement('div');
-    createCategoriesButton.innerHTML= `
+        const createCategoriesButton = document.createElement('div');
+        createCategoriesButton.innerHTML = `
     
     <button id="btn-('${categoriesPetData.category}')" onclick="petsCategory('${categoriesPetData.category}')" 
     class="btn-pet-category btn m-2 w-80 font-extrabold text-xl bg-white hover:bg-[#0E7A811A]">
@@ -54,55 +54,63 @@ const showCategories = (categoriesPet) =>{
     ${categoriesPetData.category}
     </button>`;
 
-    categoriesSection.append(createCategoriesButton);
+        categoriesSection.append(createCategoriesButton);
 
     });
 }
 
 // create card for all pets
-const fetchPetCard = () =>{
+const fetchPetCard = () => {
+    /////// spinner //////
+    const cardsContainer = document.getElementById('cards-div');
+    cardsContainer.classList.remove("grid");
+    cardsContainer.innerHTML = `
+   <div class="flex items-center justify-center">
+   <span id="spinner" class="loading loading-bars loading-lg"></span>
+   </div>
+   `
     fetch('https://openapi.programming-hero.com/api/peddy/pets')
-    .then((res) => res.json())
-    .then((data) => showPetsCards(data.pets))
-    .catch((err) => console.log(err))
+        .then((res) => res.json())
+        .then((data) => setTimeout(() => showPetsCards(data.pets), 2000))
+        .catch((err) => console.log(err))
 };
 fetchPetCard();
 
 //show the card for pets
-const showPetsCards = (cardsData) =>{
+const showPetsCards = (cardsData) => {
     // console.log(cardsData)
     const cardsContainer = document.getElementById('cards-div');
     cardsContainer.innerHTML = "";
 
-    if(cardsData.length === 0){
+    if (cardsData.length === 0) {
         cardsContainer.classList.remove('grid');
-        cardsContainer.innerHTML =`
+        cardsContainer.innerHTML = `
         <div class="min-h-[400px] bg-[#13131308] flex flex-col justify-center items-center">
         <img src="images/error.webp" />
         <h1 class="font-extrabold">No Information Available</h1>
         <p class="text-gray-600">Take a look at the amazing world of birds, where every species has its own distinct beauty and habit. Although comprehensive material is not yet available, this category will soon be updated with fascinating details on different bird species, their habitats, and their unique traits.</p>
         </div> `;
         return;
-    }else{
+    } else {
         cardsContainer.classList.add('grid');
     }
 
     cardsData.forEach((cardInfo) => {
-    const {image, pet_name, breed, date_of_birth, gender, price, petId} = cardInfo;
-    // console.log(cardInfo)
-    const card = document.createElement('div');
-    card.innerHTML = `
+        const { image, pet_name, breed, date_of_birth, gender, price, petId } = cardInfo;
+        // console.log(cardInfo)
+        const card = document.createElement('div');
+        card.innerHTML = `
     <div class="text-left border-2 p-7 text-gray-600">
     <img class="w-full h-[160px] object-cover rounded" src="${image}"/>
     <h1 class="font-bold text-xl text-black mt-4">${pet_name}</h1>
 
     <div class="flex flex-cols gap-2 ">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/breed-icon.png" />
-     <p>Breed: ${breed !== undefined ? `${breed}` : "Not Found any Breed" }</p>
+     <p>Breed: ${breed !== undefined ? `${breed}` : "Not Found any Breed"}</p>
     </div>
     <div class="flex flex-cols gap-2">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/calendar-icon.png"
-    <p>Birth: ${date_of_birth !== null ? `${date_of_birth}` : "Not Found Birth Date" }</p>
+    <p>Birth: ${date_of_birth !== null ? `${date_of_birth}` : "Not Found Birth Date"}</p>
     </div>
     <div class="flex flex-cols gap-1">
     <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
@@ -119,17 +127,17 @@ const showPetsCards = (cardsData) =>{
    </div>
     </div>`;
 
-    cardsContainer.append(card);
+        cardsContainer.append(card);
     });
 }
 
 
 // like-button functionality
-const getLikeButton = (imgSrc) =>{
-    console.log(imgSrc);
+const getLikeButton = (imgSrc) => {
+    // console.log(imgSrc);
     const likePetsContainer = document.getElementById('liked-div');
     const newContainer = document.createElement('div');
-    newContainer.classList.add = "h-[10px]";
+    // newContainer.classList.add = "h-[10px]";
     newContainer.innerHTML = `
     <img class="border-2 p-2 rounded" src="${imgSrc}" />
     `;
@@ -138,34 +146,39 @@ const getLikeButton = (imgSrc) =>{
 
 ////////////get pets by categoryName///////////
 
-    // const petsCategory = async (categoryName) =>{
-    // fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
-    // .then((res) => res.json())
-    // .then((data) => showPetsCards(data.data))
-    // .catch((err) => console.log(err))
-    // }
+// const petsCategory = async (categoryName) =>{
+// fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`)
+// .then((res) => res.json())
+// .then((data) => showPetsCards(data.data))
+// .catch((err) => console.log(err))
+// }
 
-    const petsCategory = async (name) =>{
+const petsCategory = async (name) => {
+    const cardsContainer = document.getElementById('cards-div');
+    cardsContainer.classList.remove("grid");
+    cardsContainer.innerHTML = `
+       <div class="flex items-center justify-center">
+       <span id="spinner" class="loading loading-bars loading-lg"></span>
+       </div>
+       `
     const apiURL = `https://openapi.programming-hero.com/api/peddy/category/${name}`;
     const response = await fetch(apiURL);
     const data = await response.json();
-    {  
-         //remove-active-button
-         removeActiveButton();
-
+    {
+        //remove-active-button
+        removeActiveButton();
         //active-button
-    const btnActive = document.getElementById(`btn-('${name}')`);
-    btnActive.classList.add("btn-active");
-    btnActive.classList.remove("bg-white");
-
-    console.log(btnActive);
-        showPetsCards(data.data)
+        const btnActive = document.getElementById(`btn-('${name}')`);
+        btnActive.classList.add("btn-active");
+        btnActive.classList.remove("bg-white");
+        console.log(btnActive);
+        setTimeout(() => showPetsCards(data.data), 2000);
     };
 };
 
 
 // details pet's card
-const detailsCard = async (petId) =>{
+const detailsCard = async (petId) => {
     const apiURL = `https://openapi.programming-hero.com/api/peddy/pet/${petId}`;
     const response = await fetch(apiURL);
     const data = await response.json();
@@ -173,7 +186,7 @@ const detailsCard = async (petId) =>{
 }
 
 // show details
-const showDetails = (petData)=>{
+const showDetails = (petData) => {
     const detailsModal = document.getElementById('modal-section');
     document.getElementById('myModal').showModal();
     detailsModal.innerHTML = `
@@ -184,11 +197,11 @@ const showDetails = (petData)=>{
 <div class="flex flex-cols gap-4">
     <div class="flex flex-cols gap-2 ">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/breed-icon.png" />
-     <p>Breed: ${petData.breed !== undefined ? `${petData.breed}` : "Not Found" }</p>
+     <p>Breed: ${petData.breed !== undefined ? `${petData.breed}` : "Not Found"}</p>
     </div>
     <div class="flex flex-cols gap-2">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/calendar-icon.png"
-    <p>Birth: ${petData.date_of_birth !== null ? `${petData.date_of_birth}` : "Not Found Birth Date" }</p>
+    <p>Birth: ${petData.date_of_birth !== null ? `${petData.date_of_birth}` : "Not Found Birth Date"}</p>
     </div>
 </div>
   <div class="flex flex-cols gap-6 mt-1">
@@ -203,7 +216,7 @@ const showDetails = (petData)=>{
 </div>
      <div class="flex flex-cols gap-1 mb-3">
     <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
-    <p>Vaccinated status: ${petData.vaccinated_status !== null ? `${petData.vaccinated_status}` : "No status found" }</p>
+    <p>Vaccinated status: ${petData.vaccinated_status !== null ? `${petData.vaccinated_status}` : "No status found"}</p>
     </div>
     <hr>
     <h1 class="font-bold my-3 text-black">Details Information</h1
