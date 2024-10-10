@@ -6,12 +6,14 @@ viewMoreButton.addEventListener('click', function () {
 });
 
 //sorting
-const sortData = (data)=>{
+const sortData = () => {
     fetch('https://openapi.programming-hero.com/api/peddy/pets')
-    .then((res) => res.json())
-    .then((data) => {data.pets.sort((a,b)=> b.price-a.price);
-        showPetsCards(data.pets)})
-    .catch((err) => console.log(err))
+        .then((res) => res.json())
+        .then((data) => {
+            data.pets.sort((a, b) => b.price - a.price);
+            showPetsCards(data.pets)
+        })
+        .catch((err) => console.log(err))
 }
 
 // countdown
@@ -37,15 +39,15 @@ const getCountDown = (btnId, countNum = 3) => {
         displayCount.innerHTML = `${countNum}`
         countNum--;
 
-    if (countNum < 0) {
-        countInfo.remove();
-        clearInterval(counterInterval);
-        document.getElementById('countModal-section').close("btn-adopt");
-        adoptedButton.disabled = true;
-        adoptedButton.innerHTML =`Adopted`;
-    }
+        if (countNum < 0) {
+            countInfo.remove();
+            clearInterval(counterInterval);
+            document.getElementById('countModal-section').close("btn-adopt");
+            adoptedButton.disabled = true;
+            adoptedButton.innerHTML = `Adopted`;
+        }
 
-}, 1000);
+    }, 1000);
 
 };
 
@@ -131,7 +133,7 @@ const showPetsCards = (cardsData) => {
         const card = document.createElement('div');
         card.innerHTML = `
     <div class="text-left border-2 p-7 text-gray-600">
-    <img class="w-full h-[160px] object-cover rounded" src="${image}"/>
+    <img class="w-full lg:h-[160px] object-cover rounded" src="${image}"/>
     <h1 class="font-bold text-xl text-black mt-4">${pet_name}</h1>
 
     <div class="flex flex-cols gap-2 ">
@@ -183,7 +185,7 @@ const getLikeButton = (imgSrc) => {
 // .catch((err) => console.log(err))
 // }
 
-    const petsCategory = async (name) => {
+const petsCategory = async (name) => {
     const cardsContainer = document.getElementById('cards-div');
     cardsContainer.classList.remove("grid");
     cardsContainer.innerHTML = `
@@ -203,7 +205,7 @@ const getLikeButton = (imgSrc) => {
         btnActive.classList.remove("bg-white");
         // console.log(btnActive);
         setTimeout(() => showPetsCards(data.data), 2000);
-        data.data.sort((a,b) => b.price - a.price);
+        data.data.sort((a, b) => b.price - a.price);
     };
 };
 
@@ -221,34 +223,38 @@ const showDetails = (petData) => {
     const detailsModal = document.getElementById('modal-section');
     document.getElementById('myModal').showModal();
     detailsModal.innerHTML = `
-<div class="text-left border-2 p-7 text-gray-500">
-    <img class="w-full h-[160px] object-cover rounded" src="${petData.image}"/>
+<div class="text-left border-2 p-5 text-gray-500">
+    <img class="w-full object-cover rounded" src="${petData.image}"/>
     <h1 class="font-bold text-xl text-black mt-4">${petData.pet_name}</h1>
 
-<div class="flex flex-cols gap-4">
-    <div class="flex flex-cols gap-2 ">
+<div class="grid grid-cols-2 gap-1">
+
+    <div class="flex gap-1">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/breed-icon.png" />
      <p>Breed: ${petData.breed !== undefined ? `${petData.breed}` : "Not Found"}</p>
     </div>
-    <div class="flex flex-cols gap-2">
+
+    <div class="flex  gap-1">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/calendar-icon.png"
     <p>Birth: ${petData.date_of_birth !== null ? `${petData.date_of_birth}` : "Not Found Birth Date"}</p>
     </div>
-</div>
-  <div class="flex flex-cols gap-6 mt-1">
-    <div class="flex flex-cols gap-1">
+
+    <div class="flex gap-1">
     <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
      <p>Gender: ${petData.gender}</p>
     </div>
-    <div class="flex flex-cols gap-1 ">
+
+    <div class="flex gap-1 ">
     <img class="w-5 h-5 opacity-65" src="images/dollar-icon.png"
-      <p">Price: ${petData.price}$</p>
+    <p>Price: ${petData.price}$</p>
     </div>
-</div>
-     <div class="flex flex-cols gap-1 mb-3">
+
+    <div class="flex gap-1 mb-3">
     <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
     <p>Vaccinated status: ${petData.vaccinated_status !== null ? `${petData.vaccinated_status}` : "No status found"}</p>
     </div>
+
+</div>
     <hr>
     <h1 class="font-bold my-3 text-black">Details Information</h1
     <p>${petData.pet_details}</p>

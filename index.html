@@ -47,7 +47,7 @@
 </style>
 
 <body>
-  <header class="hidden">
+  <header>
     <nav class="w-11/12 mx-auto justify-center py-7">
       <div class="navbar bg-base-100 mb-7">
 
@@ -115,9 +115,9 @@
       </div>
 
       <!-- adopt pets cards information -->
-      <div class="grid grid-cols-4 gap-5 mt-5">
-        <div id="cards-div" class="lg:col-span-3 col-span-2 grid lg:grid-cols-3 gap-5"></div>
-        <div id="liked-div" class="lg:col-span-1 col-span-2 grid lg:grid-cols-2 gap-2 p-3 h-[200px]"></div>
+      <div class="grid lg:grid-cols-4 gap-5 mt-5">
+        <div id="cards-div" class="lg:col-span-3 grid lg:grid-cols-3 gap-5"></div>
+        <div id="liked-div" class="lg:col-span-1 grid grid-cols-2 gap-2 p-3 lg:h-[200px]"></div>
       </div>
 
       <!-- details-modal -->
@@ -126,10 +126,10 @@
           <div id="modal-section">
 
           </div>
-          <div class="modal-action flex justify-center modal-btn p-3 rounded border border-indigo-300">
+          <div class="modal-action flex justify-center">
             <form method="dialog">
               <!-- if there is a button in form, it will close the modal -->
-              <button class="text-[#0E7A81] font-bold w-96" onclick="">Cancel</button>
+              <button class="text-[#0E7A81] font-bold w-96 modal-btn p-3 rounded border border-indigo-300" onclick="">Cancel</button>
             </form>
           </div>
         </div>
@@ -141,20 +141,20 @@
 
 
                       <!-- footer -->
-  <footer class="footer bg-neutral text-neutral-content p-10">
+  <footer class="footer bg-black text-neutral-content p-10">
     <nav>
       <div class="flex gap-2">
         <img class="w-7 h-6" src="./images/logo.webp" alt="">
       <h2 class="font-extrabold text-xl text-white">Peddy</h2>
       </div>
- <p>Location: av. Washington 165, NYCA</p>
+      <p>Location: av. Washington 165, NYCA</p>
       <a class="link link-hover">54003</a>
       <a class="link link-hover">Phone: +31 85 964 47 25</a>
       <a class="link link-hover">Email: info@yourdomain.com</a>
       <a class="link link-hover">openings hours: 9.00 AM - 5.00 PM</a>
       <div class="flex gap-4 w-9">
         <img src="https://img.icons8.com/?size=100&id=118495&format=png&color=000000" alt="">
-        <img src="https://img.icons8.com/?size=100&id=fJp7hepMryiw&format=png&color=000000" alt="">
+        <img class="bg-white rounded h-7 mt-1" src="https://img.icons8.com/?size=100&id=fJp7hepMryiw&format=png&color=000000" alt="">
       <img src="https://img.icons8.com/?size=100&id=9a46bTk3awwI&format=png&color=000000" alt="">
     <img src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=000000" alt="">  
     </div>
@@ -168,11 +168,11 @@
     </nav>
     <nav>
       <div class="flex flex-col">
-        <h6 class="link link-hover">Drop a Message</h6>
+        <h6 class="link link-hover mb-3 text-white font-bold">Drop a Message</h6>
         <input
           type="text"
-          placeholder="username@site.com"
-          class="input bg-gray-100" />
+          placeholder="Enter your email"
+          class="input bg-gray-800" />
           <button class="btn btn-subscribe border-none mt-3">Subscribe</button>
       </div>
     </nav>
