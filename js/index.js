@@ -138,19 +138,20 @@ const showPetsCards = (cardsData) => {
 
     <div class="flex flex-cols gap-2 ">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/breed-icon.png" />
-     <p>Breed: ${breed !== undefined ? `${breed}` : "Not Found any Breed"}</p>
+     <p>Breed: ${typeof (breed) === "string" ? `${breed}` : "Not Found"}</p>
     </div>
     <div class="flex flex-cols gap-2">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/calendar-icon.png"
-    <p>Birth: ${date_of_birth !== null ? `${date_of_birth}` : "Not Found Birth Date"}</p>
+    <p>Birth: ${typeof (date_of_birth) === "string" ? `${date_of_birth}` : "Not Found"}</p>
+    
     </div>
     <div class="flex flex-cols gap-1">
     <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
-     <p>Gender: ${gender}</p>
+     <p>Gender: ${typeof(gender) === "string" ? `${gender}` : "Not Found"}</p>
     </div>
     <div class="flex flex-cols gap-1">
     <img class="w-5 h-5 opacity-65" src="images/dollar-icon.png"
-    <p>Price: ${price !== null ? `${price}` : "Not Found Price"}</p>
+    <p>Price: ${typeof(price) === "number" ? `${price}$` : "Not Available"}</p>
     </div>
    <div class="mt-2">
    <button onclick="getLikeButton('${image}')" class="btn w-[50px] border-solid border-2 border-indigo-100 bg-white hover:border-3 hover:border-[#0E7A81] hover:bg-white"><img class="w-4" src="images/like.png"/></button>
@@ -221,37 +222,42 @@ const detailsCard = async (petId) => {
 // show details
 const showDetails = (petData) => {
     const detailsModal = document.getElementById('modal-section');
+
+    const{image, pet_name, breed,date_of_birth,gender,price,vaccinated_status} = petData;
     document.getElementById('myModal').showModal();
+    // petData.forEach(data) =>{
+
+    // }
     detailsModal.innerHTML = `
 <div class="text-left border-2 p-5 text-gray-500">
-    <img class="w-full object-cover rounded" src="${petData.image}"/>
-    <h1 class="font-bold text-xl text-black mt-4">${petData.pet_name}</h1>
+    <img class="w-full object-cover rounded" src="${image}"/>
+    <h1 class="font-bold text-xl text-black mt-4">${pet_name}</h1>
 
 <div class="grid grid-cols-2 gap-1">
 
     <div class="flex gap-1">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/breed-icon.png" />
-     <p>Breed: ${petData.breed !== undefined ? `${petData.breed}` : "Not Found"}</p>
+     <p>Breed: ${typeof(breed) === "string"? `${breed}` : "Not Found"}</p>
     </div>
 
     <div class="flex  gap-1">
     <img class="w-4 h-4 mt-1 opacity-65" src="images/calendar-icon.png"
-    <p>Birth: ${petData.date_of_birth !== null ? `${petData.date_of_birth}` : "Not Found Birth Date"}</p>
+    <p>Birth: ${typeof(date_of_birth) === "string" ? `${date_of_birth}` : "Not Found"}</p>
     </div>
 
     <div class="flex gap-1">
     <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
-     <p>Gender: ${petData.gender}</p>
+     <p>Gender: ${typeof(gender) === "string" ? `${gender}` : "Not Found"}</p>
     </div>
 
     <div class="flex gap-1 ">
     <img class="w-5 h-5 opacity-65" src="images/dollar-icon.png"
-    <p>Price: ${petData.price}$</p>
+    <p>Price: ${typeof(price) === "number" ? `${price}$` : "Not Available"}</p>
     </div>
 
     <div class="flex gap-1 mb-3">
     <img class="w-5 h-5 mt-1 opacity-65" src="images/gender-icon.png"
-    <p>Vaccinated status: ${petData.vaccinated_status !== null ? `${petData.vaccinated_status}` : "No status found"}</p>
+    <p>Vaccinated status: ${typeof(vaccinated_status) === "string" ? `${vaccinated_status}` : "No status found"}</p>
     </div>
 
 </div>
