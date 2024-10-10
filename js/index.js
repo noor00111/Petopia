@@ -132,7 +132,7 @@ const showPetsCards = (cardsData) => {
         // console.log(cardInfo)
         const card = document.createElement('div');
         card.innerHTML = `
-    <div class="text-left border-2 p-7 text-gray-600">
+    <div class="text-left border-2 p-5 text-gray-600">
     <img class="w-full lg:h-[160px] object-cover rounded" src="${image}"/>
     <h1 class="font-bold text-xl text-black mt-4">${pet_name}</h1>
 
@@ -169,7 +169,7 @@ const getLikeButton = (imgSrc) => {
     // console.log(imgSrc);
     const likePetsContainer = document.getElementById('liked-div');
     const newContainer = document.createElement('div');
-    // newContainer.classList.add = "h-[10px]";
+    // newContainer.style.height = '90px';
     newContainer.innerHTML = `
     <img class="border-2 p-2 rounded" src="${imgSrc}" />
     `;

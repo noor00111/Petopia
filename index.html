@@ -108,7 +108,7 @@
       </dialog>
       <!-- //sorting price -->
       <div id="sort-section" class="sort-price grid grid-cols-2 mt-3 px-3">
-        <h1 class="text-left font-bold text-lg">Best Deal For You</h1>
+        <h1 class="text-left font-bold text-lg mt-3">Best Deal For You</h1>
         <div class="flex justify-end">
           <button onclick="sortData()" class="btn btn-sort">Sort by Price</button>
         </div>
@@ -117,7 +117,11 @@
       <!-- adopt pets cards information -->
       <div class="grid lg:grid-cols-4 gap-5 mt-5">
         <div id="cards-div" class="lg:col-span-3 grid lg:grid-cols-3 gap-5"></div>
-        <div id="liked-div" class="lg:col-span-1 grid grid-cols-2 gap-2 p-3 border-2"></div>
+        <div class="border-2">
+          <div id="liked-div" class=" grid lg:grid-cols-2 md:grid-cols-2 gap-2 p-3">
+
+          </div>
+        </div>
       </div>
 
       <!-- details-modal -->
