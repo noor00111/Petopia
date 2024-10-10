@@ -5,10 +5,15 @@ viewMoreButton.addEventListener('click', function () {
     adoptInfo.scrollIntoView({ behavior: 'smooth' });
 });
 
+
 // countdown
-const getCountDown = (countNum = 3) => {
+const getCountDown = (btnId, countNum = 3) => {
+    const adoptedButton = document.getElementById(`btn-adopt-${btnId}`);
+    console.log(btnId);
+
     document.getElementById('countModal-section').showModal();
     const counterModal = document.getElementById('countdown-modal-box');
+    
     const countInfo = document.createElement('div');
     countInfo.innerHTML = `
     <img class="mx-auto justify-center" src="./images/congo.png"/>
@@ -21,19 +26,22 @@ const getCountDown = (countNum = 3) => {
     counterModal.append(countInfo);
 
     const counterInterval = setInterval(() => {
-        console.log(countNum);
+        // console.log(countNum);
         const displayCount = document.getElementById('display-count');
         displayCount.innerHTML = `${countNum}`
         countNum--;
-   
+
     if (countNum < 0) {
         countInfo.remove();
-        document.getElementById('countModal-section').close();
         clearInterval(counterInterval);
+        document.getElementById('countModal-section').close("btn-adopt");
+        adoptedButton.disabled = true;
+        adoptedButton.innerHTML =`Adopted`;
     }
-}, 1000);
-};
 
+}, 1000);
+
+};
 
 // remove active class
 const removeActiveButton = () => {
@@ -134,11 +142,11 @@ const showPetsCards = (cardsData) => {
     </div>
     <div class="flex flex-cols gap-1">
     <img class="w-5 h-5 opacity-65" src="images/dollar-icon.png"
-    <p>Price: ${price !== null ? `${price}` : "No Found Price"}</p>
+    <p>Price: ${price !== null ? `${price}` : "Not Found Price"}</p>
     </div>
    <div class="mt-2">
    <button onclick="getLikeButton('${image}')" class="btn w-[50px] border-solid border-2 border-indigo-100 bg-white hover:border-3 hover:border-[#0E7A81] hover:bg-white"><img class="w-4" src="images/like.png"/></button>
-   <button onclick="getCountDown()" class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white hover:bg-[#0E7A81]  hover:text-white font-bold">Adopt</button>
+   <button id="btn-adopt-${petId}" onclick="getCountDown(${petId})" class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white hover:bg-[#0E7A81]  hover:text-white font-bold">Adopt</button>
    <button onclick='detailsCard(${petId})' class="btn w-[95px] text-[#0E7A81] ml-2 border-solid border-2 border-indigo-100 bg-white hover:bg-[#0E7A81] hover:text-white font-bold">Details</button>
    </div>
     </div>`;
