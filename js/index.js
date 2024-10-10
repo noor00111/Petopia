@@ -5,15 +5,21 @@ viewMoreButton.addEventListener('click', function () {
     adoptInfo.scrollIntoView({ behavior: 'smooth' });
 });
 
+//sorting
+const sortData = (data)=>{
+    fetch('https://openapi.programming-hero.com/api/peddy/pets')
+    .then((res) => res.json())
+    .then((data) => {data.pets.sort((a,b)=> b.price-a.price);
+        showPetsCards(data.pets)})
+    .catch((err) => console.log(err))
+}
 
 // countdown
 const getCountDown = (btnId, countNum = 3) => {
     const adoptedButton = document.getElementById(`btn-adopt-${btnId}`);
-    console.log(btnId);
-
+    // console.log(btnId);
     document.getElementById('countModal-section').showModal();
     const counterModal = document.getElementById('countdown-modal-box');
-    
     const countInfo = document.createElement('div');
     countInfo.innerHTML = `
     <img class="mx-auto justify-center" src="./images/congo.png"/>
@@ -177,7 +183,7 @@ const getLikeButton = (imgSrc) => {
 // .catch((err) => console.log(err))
 // }
 
-const petsCategory = async (name) => {
+    const petsCategory = async (name) => {
     const cardsContainer = document.getElementById('cards-div');
     cardsContainer.classList.remove("grid");
     cardsContainer.innerHTML = `
@@ -195,8 +201,9 @@ const petsCategory = async (name) => {
         const btnActive = document.getElementById(`btn-('${name}')`);
         btnActive.classList.add("btn-active");
         btnActive.classList.remove("bg-white");
-        console.log(btnActive);
+        // console.log(btnActive);
         setTimeout(() => showPetsCards(data.data), 2000);
+        data.data.sort((a,b) => b.price - a.price);
     };
 };
 
