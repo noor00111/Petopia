@@ -6,18 +6,34 @@ viewMoreButton.addEventListener('click', function () {
 });
 
 // countdown
-// const getCountDown = (countNum = 3) =>{
-//     const counterModal = document.getElementById('countModal');
-//     counterModal.showModal();
-//     let countDown = setInterval(() => {
-//         console.log(countNum);
-//         countNum--;
-//         if(countNum <= 0){
-//             clearInterval(countDown);
-//             counterModal.close();
-//         }
-//     }, 1000);
-// };
+const getCountDown = (countNum = 3) => {
+    document.getElementById('countModal-section').showModal();
+    const counterModal = document.getElementById('countdown-modal-box');
+    const countInfo = document.createElement('div');
+    countInfo.innerHTML = `
+    <img class="mx-auto justify-center" src="./images/congo.png"/>
+    <h1 class="font-extrabold text-2xl">Congrates</h1>
+    <p class="text-gray-500">Adoption Process is Start For Your Pet</p>
+   <div>
+    <p id="display-count" class="font-extrabold text-4xl"></p>
+   </div>
+    `;
+    counterModal.append(countInfo);
+
+    const counterInterval = setInterval(() => {
+        console.log(countNum);
+        const displayCount = document.getElementById('display-count');
+        displayCount.innerHTML = `${countNum}`
+        countNum--;
+   
+    if (countNum < 0) {
+        countInfo.remove();
+        document.getElementById('countModal-section').close();
+        clearInterval(counterInterval);
+    }
+}, 1000);
+};
+
 
 // remove active class
 const removeActiveButton = () => {
@@ -118,7 +134,7 @@ const showPetsCards = (cardsData) => {
     </div>
     <div class="flex flex-cols gap-1">
     <img class="w-5 h-5 opacity-65" src="images/dollar-icon.png"
-      <p>Price: ${price}$</p>
+    <p>Price: ${price !== null ? `${price}` : "No Found Price"}</p>
     </div>
    <div class="mt-2">
    <button onclick="getLikeButton('${image}')" class="btn w-[50px] border-solid border-2 border-indigo-100 bg-white hover:border-3 hover:border-[#0E7A81] hover:bg-white"><img class="w-4" src="images/like.png"/></button>

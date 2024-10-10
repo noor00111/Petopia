@@ -23,12 +23,13 @@
   }
 
   .btn-viewMore-color,
-  .btn-sort {
+  .btn-sort,
+  .btn-subscribe  {
     background-color: #0E7A81;
     color: white;
   }
 
-  .btn-viewMore-color:hover {
+  .btn-viewMore-color:hover,.btn-sort:hover,.btn-subscribe:hover{
     background-color: #0E7A81;
   }
 
@@ -99,21 +100,17 @@
       <div id="categories" class="grid lg:grid-cols-4 md:grid-cols-2"></div>
 
       <!-- countdown -->
-      <dialog id="countModal" class="modal">
-        <div class="modal-box">
-          <h3 class="text-lg font-bold">Hello!</h3>
-          <p class="py-4">Press ESC key or click outside to close</p>
-        </div>
-        <form method="dialog" class="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog>
+      <dialog id="countModal-section" class="modal">
+        <div id="countdown-modal-box" class="modal-box">
 
+        </div>
+
+      </dialog>
       <!-- //sorting price -->
       <div id="sort-section" class="sort-price grid grid-cols-2 mt-3 px-3">
         <h1 class="text-left font-bold text-lg">Best Deal For You</h1>
         <div class="flex justify-end">
-          <button class="btn btn-sort">Sort by Price</button>
+          <button onclick="sortData()" class="btn btn-sort">Sort by Price</button>
         </div>
       </div>
 
@@ -123,7 +120,7 @@
         <div id="liked-div" class="lg:col-span-1 col-span-2 grid lg:grid-cols-2 gap-2 p-3 h-[200px]"></div>
       </div>
 
-      <!-- modal -->
+      <!-- details-modal -->
       <dialog id="myModal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box">
           <div id="modal-section">
@@ -141,7 +138,45 @@
   </main>
 
 </body>
-<footer></footer>
+
+
+                      <!-- footer -->
+  <footer class="footer bg-neutral text-neutral-content p-10">
+    <nav>
+      <div class="flex gap-2">
+        <img class="w-7 h-6" src="./images/logo.webp" alt="">
+      <h2 class="font-extrabold text-xl text-white">Peddy</h2>
+      </div>
+ <p>Location: av. Washington 165, NYCA</p>
+      <a class="link link-hover">54003</a>
+      <a class="link link-hover">Phone: +31 85 964 47 25</a>
+      <a class="link link-hover">Email: info@yourdomain.com</a>
+      <a class="link link-hover">openings hours: 9.00 AM - 5.00 PM</a>
+      <div class="flex gap-4 w-9">
+        <img src="https://img.icons8.com/?size=100&id=118495&format=png&color=000000" alt="">
+        <img src="https://img.icons8.com/?size=100&id=fJp7hepMryiw&format=png&color=000000" alt="">
+      <img src="https://img.icons8.com/?size=100&id=9a46bTk3awwI&format=png&color=000000" alt="">
+    <img src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=000000" alt="">  
+    </div>
+    </nav>
+    <nav>
+      <h6 class="link link-hover">Home</h6>
+      <a class="link link-hover">About us</a>
+      <a class="link link-hover">Animals</a>
+      <a class="link link-hover">Foundation</a>
+      <a class="link link-hover">Contact</a>
+    </nav>
+    <nav>
+      <div class="flex flex-col">
+        <h6 class="link link-hover">Drop a Message</h6>
+        <input
+          type="text"
+          placeholder="username@site.com"
+          class="input bg-gray-100" />
+          <button class="btn btn-subscribe border-none mt-3">Subscribe</button>
+      </div>
+    </nav>
+  </footer>
 
 <!-- js file -->
 <script src="js/index.js"></script>
